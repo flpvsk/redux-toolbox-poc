@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import { Product, LocationInfo, Cart } from 'interfaces';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { Server } from 'server';
 
 interface CartState {
@@ -47,19 +47,7 @@ export const create = createAsyncThunk(
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {
-    create(state, { payload }: PayloadAction<LocationInfo>) {
-      const id = nanoid();
-      const locationInfo = payload;
-      const cart = {
-        id,
-        locationInfo,
-        contents: [],
-      };
-
-      state.cart = cart;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(create.fulfilled, (state, { payload }) => {
       state.cart = payload;
