@@ -23,10 +23,7 @@ const Cart = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (
-      isFetchingProducts ||
-      productsLastFetchedTime > now - 5_000
-    ) {
+    if (isFetchingProducts || productsLastFetchedTime > now - 5_000) {
       return () => {};
     }
     dispatch(cart.fetchProducts());

@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
-import { Product, LocationInfo, Cart, Id } from 'interfaces';
+import { Product, LocationInfo, Cart } from 'interfaces';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Server } from 'server';
 
 interface CartState {

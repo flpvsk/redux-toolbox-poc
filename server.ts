@@ -24,7 +24,7 @@ export const Server = {
         lat: Math.random(),
         lng: Math.random(),
         postalCode: randomString(4),
-        city: randomString(Math.random() * 10 + 4),
+        city: s + randomString(Math.random() * 10 + 4),
       });
     }
     return result;
