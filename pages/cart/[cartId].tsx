@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from 'store';
@@ -8,6 +8,7 @@ import { Product } from 'interfaces';
 const Cart = () => {
   const router = useRouter();
   const { cartId, step } = router.query;
+  const [now, setNow] = useState(Date.now());
   const {
     isFetchingProducts,
     productsLastFetchedTime,
@@ -23,13 +24,18 @@ const Cart = () => {
 
   useEffect(() => {
     if (
-      !isFetchingProducts &&
-      productsLastFetchedTime < Date.now() - 60_000
+      isFetchingProducts ||
+      productsLastFetchedTime > now - 5_000
     ) {
-      console.log('dispatch');
-      dispatch(cart.fetchProducts());
+      return () => {};
     }
-  }, [isFetchingProducts, productsLastFetchedTime, dispatch]);
+    dispatch(cart.fetchProducts());
+  }, [isFetchingProducts, productsLastFetchedTime, now, dispatch]);
+
+  useEffect(() => {
+    const timer = setInterval(() => setNow(Date.now()), 3_000);
+    return () => clearInterval(timer);
+  });
 
   let productsSection = null;
   if (isFetchingProducts) {

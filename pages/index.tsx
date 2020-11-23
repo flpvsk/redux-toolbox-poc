@@ -10,7 +10,7 @@ const Home = () => {
   const [q, setQ] = useState('');
   const dispatch = useAppDispatch();
 
-  function onSearchChange(e) {
+  function onSearchChange(e: any) {
     setQ(e.target.value);
   }
 
